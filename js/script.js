@@ -38,12 +38,24 @@ const hurdle = new Obstacles()
 
 
 
+let timer = 0
+// make hurdles array and drawing many hurdles using forEach method
+const hurdles = []
+
 function movingHurdle(){
     requestAnimationFrame(movingHurdle)
+    // more hurdles
+    timer++
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    hurdle.x --
-    hurdle.draw()
-    
+    if (timer% 240 === 0){
+        let hurdle = new Obstacles()
+        hurdles.push(hurdle)
+        console.log(hurdles)
+    }
+    hurdles.forEach((hurdle)=>{
+        hurdle.x --
+        hurdle.draw()
+    })
     mario.draw()
 }
 movingHurdle()
