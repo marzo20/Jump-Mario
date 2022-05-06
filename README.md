@@ -14,6 +14,8 @@ Do you think Mario is fast enough to win the race?
 - Pressing upwards arrow key will make mario jump
 - Able to detect Mario hitting the hurdle
 
+![wireframe](./wireframe.png)
+
 
 
 
