@@ -5,7 +5,7 @@ canvas.width = window.innerWidth - 100
 canvas.height = window.innerHeight - 100
 
 // Make a square for Mario
-const Mario = {
+const mario = {
     x: 50,
     y: 350,
     width: 50,
@@ -15,7 +15,7 @@ const Mario = {
         ctx.fillRect (this.x, this.y, this.width, this.height)
     }
 }
-Mario.draw()
+// mario.draw()
 
 // Make a square for hurdle
 
@@ -32,4 +32,18 @@ class Obstacles {
     }
 }
 const hurdle = new Obstacles()
-hurdle.draw()
+// hurdle.draw()
+
+// Make the Obastacle move
+
+
+
+function movingHurdle(){
+    requestAnimationFrame(movingHurdle)
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    hurdle.x --
+    hurdle.draw()
+    
+    mario.draw()
+}
+movingHurdle()
