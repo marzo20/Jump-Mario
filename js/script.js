@@ -42,19 +42,40 @@ let timer = -2
 // make hurdles array
 const hurdles = []
 let jumpTimer = 0
+var anmation
+let counting = 1
+// make hurdles move towards mario using animation
 function movingHurdle(){
-    requestAnimationFrame(movingHurdle)
+    animation = requestAnimationFrame(movingHurdle)
     // more hurdles
     timer++
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    if (timer% 250 === 0){
+    if (timer% 300 === 0){
         let hurdle = new Obstacles()
         hurdles.push(hurdle)
-        console.log(hurdles)
+          
     }
     // drawing many hurdles using forEach method and hurdles array
     hurdles.forEach((hurdle)=>{
         hurdle.x --
+        hurdle.draw()
+       
+    })
+    // check if mario hit each hurdles
+    hurdles.forEach((hurdle, i, o) => {
+        if (hurdle.x <0){
+            o.splice(i, 1)
+            // counting passed hurdles for record
+          const status = document.querySelector('#status')
+          
+        //   const countHurdles = counting++
+          status.innerText = ''
+          status.innerText = counting++
+           
+            
+
+        }
+        collision(mario, hurdle)
         hurdle.draw()
     })
     
@@ -62,11 +83,11 @@ function movingHurdle(){
     if(jumping == true){
         mario.y--
         jumpTimer++
-        console.log('spacebar clicked')
-        console.log(jumpTimer)
+        // console.log('spacebar clicked')
+        // console.log(jumpTimer)
     }
     // mario coming down 
-    if(jumpTimer> 105){
+    if(jumpTimer> 120){
         jumping = false
         if(mario.y <350){
             mario.y++
@@ -75,6 +96,7 @@ function movingHurdle(){
             }
         }    
     }
+    // another syntax
     // if(jumping == false){
     //     if(mario.y <350){
     //         mario.y++
@@ -82,18 +104,56 @@ function movingHurdle(){
     //     }
     // }
     
-   
 
     mario.draw()
 }
-
+// detect collision
+function collision(mario, hurdle){
+    const xAxis = hurdle.x - (mario.x + mario.width)
+    const yAxis = hurdle.y - (mario.y + mario.height)
+    if( xAxis < 0 && yAxis < 0){
+        // if mario hits hurdle, animation stop
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        cancelAnimationFrame(animation)
+    }
+}
+// not working...
+// function detectCollision (){
+//     const hurdleLeft = mario.x + mario.width >= hurdle.x
+//     const hurdleRight = mario.x <= hurdle.x + hurdle.width
+//     const hurdleTop = mario.y + mario.height >= hurdle.y
+//     const hurdleBottom = mario.y <= hurdle.y + hurdle.height
+//     if( mario.x + mario.width >= hurdle.x &&
+//         // right
+//         mario.x <= hurdle.x + hurdle.width &&
+//         // top
+//         mario.y + mario.height >= hurdle.y &&
+//         // bottom
+//         mario.y <= hurdle.y + hurdle.height){
+//         console.log('mario hit the hurdle')
+//         mario.pass = false
+//     }
+// }
 
 // // make Mario jump
 let jumping = false
+
+    
 document.addEventListener('keyup', (event) => {
     if(event.code === 'Space') {
         jumping = true
-        console.log('space pressed')
+     
     }
 })
 movingHurdle()
+
+// function gameLoop () {
+//     ctx.clearRect(0, 0, canvas.width, canvas.height)
+//     detectCollision()
+//     if(mario.pass = true){
+//         mario.draw()
+//         hurdle.draw()
+//     }
+
+// }
+// gameLoop()
