@@ -1,3 +1,42 @@
-#canvas{
-    background-image: url('Project-1/images/running-track.webp');
+body{
+    text-align: center;
+}
+#container{
+    background-color: rgb(13, 170, 232);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: grid;
+    grid-template-columns: .25fr .5fr .25fr;
+    /* grid-template-rows: 0.2fr 0.4fr 0.4fr; */
+    grid-template-areas: "top1 top2 top3"
+                         "game game game"
+                         "game game game"
+
+}
+#top-left{
+    grid-area: top1;
+    display: flex;
+}
+#status{
+    font-size: 40px;
+    color: darkgreen;
+    font-weight: bold;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    grid-area: top3;
+}
+#press{
+    font-size: 40px;
+    color: white;
+    grid-area: top2;
+    text-align: center;
+}
+main{
+    grid-area: game;
+    z-index: 0;
+}
+#start{
+    z-index: 1;
 }

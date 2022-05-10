@@ -12,7 +12,7 @@ function Background(){
     this.x = 0, this.y = 0, this.width = canvas.width, this.height = canvas.height
     this.render = function (){
         ctx.drawImage(bg, this.x--,-800)
-        if(this.x <= -2000){
+        if(this.x <= -3000){
             this.x = 0
         }
     }
@@ -20,13 +20,13 @@ function Background(){
 const background = new Background()
 // Make a square for Mario
 const mario = {
-    x: 50,
+    x: 75,
     y: 550,
     width: 50,
     height: 50,
     draw(){
         ctx.fillStyle = 'green'
-        ctx.fillRect (this.x, this.y, this.width, this.height)
+        // ctx.fillRect (this.x, this.y, this.width, this.height)
         ctx.drawImage(mario1, this.x-50, this.y-75)
     }
 }
@@ -37,7 +37,7 @@ const img1 = new Image()
 img1.src = 'images/GreenShell1.png'
 class Obstacles {
     constructor(){
-        this.x = 1200
+        this.x = 1400
         this.y = 550
         this.width = 50
         this.height = 50
@@ -88,12 +88,12 @@ function movingHurdle(){
           
         //   const countHurdles = counting++
           status.innerText = ''
-          status.innerText = counting++
+          status.innerText = `score: ${counting++}`
            
             
 
         }
-        // background.render()
+        
         hurdle.draw()
         collision(mario, hurdle)
     })
@@ -132,8 +132,9 @@ function collision(mario, hurdle){
     const yAxis = hurdle.y - (mario.y + mario.height)
     if( xAxis < 0 && yAxis < 0){
         // if mario hits hurdle, animation stop
-        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        // ctx.clearRect(0, 0, canvas.width, canvas.height)
         cancelAnimationFrame(animation)
+        // background.render()
     
     }
 }
