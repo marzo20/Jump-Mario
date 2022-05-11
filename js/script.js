@@ -129,7 +129,7 @@ function movingHurdle(){
           
         //   const countHurdles = counting++
           status.innerText = ''
-          status.innerText = `score: ${counting+=5}`
+          status.innerText = `score: ${counting+=4}`
            
             
 
@@ -179,7 +179,10 @@ function collision(mario, hurdle){
         cancelAnimationFrame(animation)
         press.innerText = ''
         press.innerText = 'Press ESC to restart'
-        alert(`You scored ${counting-1}`)
+        ctx.font = "30px Comic Sans MS"
+        ctx.fillStyle = "red"
+        ctx.textAlign = "center"
+        ctx.fillText("Game Over", canvas.width/2, 200)
     
     }
 }
@@ -190,7 +193,12 @@ function hitDetect(mario, shell){
         cancelAnimationFrame(animation)
         press.innerText = ''
         press.innerText = 'Press ESC to restart'
-        alert(`You scored ${counting-1}`)
+        ctx.font = "30px Comic Sans MS"
+        ctx.fillStyle = "red"
+        ctx.textAlign = "center"
+        ctx.fillText("Game Over", canvas.width/2, 200)
+        
+
     }
 }
 // not working...
@@ -213,15 +221,18 @@ function hitDetect(mario, shell){
 
 // // make Mario jump
 let jumping = false
-// document.addEventListener('keyup', (event) => {
-//     if(event.code === 'Enter'){
-//         press.innerText = 'Fast Mode'
-        
-//     }
-// } )
+let gameOn = false
+document.addEventListener('keyup', (event) => {
+    if(event.code === 'Enter'){
+        gameOn = true
+        console.log('enter pressed')
+        movingHurdle()
+    }
+} )
 document.addEventListener('keyup', (event) => {
     if(event.code === 'Escape'){
         document.location.reload(true)
+        
     }
 })
     
@@ -231,9 +242,31 @@ document.addEventListener('keyup', (event) => {
         press.innerText = ''
     }
 })
+ctx.font = "30px Comic Sans MS"
 
-movingHurdle()
-
+ctx.textAlign = "center"
+ctx.fillStyle = 'white'
+ctx.fillText("Press Enter to Start", canvas.width/2, 200)
+function whiteText (){
+    if(gameOn == false){
+    ctx.fillText("Press Enter to Start", canvas.width/2, 200)
+    console.log('white')
+    }
+}
+function clearText (){
+    
+    if(gameOn == false){
+        ctx.clearRect(0,0,canvas.width,canvas.height)
+    }
+}
+setInterval(whiteText, 1500)
+setInterval(clearText, 3000)
+// function gameStart(){
+//     if(gameOn == true){
+//         movingHurdle()
+//     }
+// }
+// gameStart()
 
 
 
