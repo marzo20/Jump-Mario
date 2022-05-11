@@ -5,9 +5,9 @@ const ctx = canvas.getContext('2d')
 canvas.width = window.innerWidth - 100
 canvas.height = window.innerHeight - 100
 const mario1 = new Image()
-mario1.src = 'images/Mario_jumping_.png'
+mario1.src = './images/Mario_jumping_.png'
 const bg = new Image()
-bg.src = 'images/645984.jpeg'
+bg.src = './images/645984.jpeg'
 function Background(){
     this.x = 0, this.y = 0, this.width = canvas.width, this.height = canvas.height
     this.render = function (){
@@ -35,8 +35,8 @@ const mario = {
 // Make a square for hurdle
 const img1 = new Image()
 const img2 = new Image()
-img1.src = 'images/GreenShell1.png'
-img2.src= 'images/tripple.png'
+img1.src = './images/GreenShell1.png'
+img2.src= './images/tripple.png'
 class Obstacles {
     constructor(){
         this.x = 1400
@@ -261,12 +261,6 @@ function clearText (){
 }
 setInterval(whiteText, 1500)
 setInterval(clearText, 3000)
-// function gameStart(){
-//     if(gameOn == true){
-//         movingHurdle()
-//     }
-// }
-// gameStart()
 
 
 
