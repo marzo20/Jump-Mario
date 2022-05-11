@@ -131,10 +131,13 @@ function collision(mario, hurdle){
     const xAxis = hurdle.x - (mario.x + mario.width)
     const yAxis = hurdle.y - (mario.y + mario.height)
     if( xAxis < 0 && yAxis < 0){
+        const press = document.querySelector('#press')
         // if mario hits hurdle, animation stop
         // ctx.clearRect(0, 0, canvas.width, canvas.height)
         cancelAnimationFrame(animation)
-        // background.render()
+        press.innerText = ''
+        press.innerText = 'Press ESC to restart'
+        alert(`You scored ${counting-1}`)
     
     }
 }
@@ -158,15 +161,29 @@ function collision(mario, hurdle){
 
 // // make Mario jump
 let jumping = false
-
+// document.addEventListener('keyup', (event) => {
+//     if(event.code === 'Enter'){
+//         press.innerText = 'Fast Mode'
+        
+//     }
+// } )
+document.addEventListener('keyup', (event) => {
+    if(event.code === 'Escape'){
+        document.location.reload(true)
+    }
+})
     
 document.addEventListener('keyup', (event) => {
     if(event.code === 'Space') {
         jumping = true
-     
+        press.innerText = ''
     }
 })
+
 movingHurdle()
+
+
+
 
 // function gameLoop () {
 //     ctx.clearRect(0, 0, canvas.width, canvas.height)
