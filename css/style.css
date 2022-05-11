@@ -20,7 +20,8 @@ body{
 }
 #status{
     font-size: 40px;
-    color: darkgreen;
+    color: whitesmoke;
+    font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     text-align: center;
     align-content: center;
@@ -30,6 +31,7 @@ body{
 #press{
     font-size: 40px;
     color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     grid-area: top2;
     text-align: center;
 }

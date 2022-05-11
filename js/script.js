@@ -34,21 +34,36 @@ const mario = {
 
 // Make a square for hurdle
 const img1 = new Image()
+const img2 = new Image()
 img1.src = 'images/GreenShell1.png'
+img2.src= 'images/tripple.png'
 class Obstacles {
     constructor(){
         this.x = 1400
         this.y = 550
-        this.width = 50
-        this.height = 50
+        this.width = 47
+        this.height = 47
     }
     draw(){
         ctx.fillStyle = 'red'
         // ctx.fillRect(this.x, this.y, this.width, this.height)
-        ctx.drawImage(img1, this.x, this.y)
+        ctx.drawImage(img1, this.x-25, this.y)
+    }
+}class Obstacles2{
+    constructor(){
+        this.x = 1400
+        this.y = 550
+        this.width = 47
+        this.height = 47
+    }
+    draw(){
+        ctx.fillStyle = 'red'
+        // ctx.fillRect(this.x, this.y, this.width, this.height)
+        ctx.drawImage(img2, this.x-25, this.y)
     }
 }
 const hurdle = new Obstacles()
+const shell = new Obstacles()
 // hurdle.draw()
 
 // Make the Obastacle move
@@ -58,8 +73,9 @@ const hurdle = new Obstacles()
 let timer = -2
 // make hurdles array
 const hurdles = []
+const shells = []
 let jumpTimer = 0
-var anmation
+var animation
 let counting = 1
 // make hurdles move towards mario using animation
 function movingHurdle(){
@@ -68,16 +84,24 @@ function movingHurdle(){
     timer++
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     background.render()
-    if (timer% 160 === 0){
+    if (timer% 139 === 0){
         let hurdle = new Obstacles()
         hurdles.push(hurdle)
-          
     }
     // drawing many hurdles using forEach method and hurdles array
     hurdles.forEach((hurdle)=>{
-        hurdle.x -=5
+        hurdle.x -=4
         hurdle.draw()
+    
        
+    })
+    if (timer % 370 === 0){
+        let shell = new Obstacles2()
+        shells.push(shell)
+    }
+    shells.forEach((shell) => {
+        shell.x -=4
+        shell.draw()
     })
     // check if mario hit each hurdles
     hurdles.forEach((hurdle, i, o) => {
@@ -97,19 +121,36 @@ function movingHurdle(){
         hurdle.draw()
         collision(mario, hurdle)
     })
-    
+    shells.forEach((shell, i, o) => {
+        if (shell.x <-5){
+            o.splice(i, 1)
+            // counting passed hurdles for record
+          const status = document.querySelector('#status')
+          
+        //   const countHurdles = counting++
+          status.innerText = ''
+          status.innerText = `score: ${counting+=5}`
+           
+            
+
+        }
+        
+        shell.draw()
+        hitDetect(mario, shell)
+    })
 // if space bar pressed, mario jumps
     if(jumping == true){
-        mario.y-=3
-        jumpTimer++
+        mario.y-=4
+        jumpTimer+=2
         // console.log('spacebar clicked')
         // console.log(jumpTimer)
     }
     // mario coming down 
-    if(jumpTimer> 70){
+    if(jumpTimer> 117){
         jumping = false
+        
         if(mario.y <550){
-            mario.y+=3
+            mario.y+=4
             if(mario.y ==550){
                 jumpTimer = 0
             }
@@ -130,6 +171,7 @@ function movingHurdle(){
 function collision(mario, hurdle){
     const xAxis = hurdle.x - (mario.x + mario.width)
     const yAxis = hurdle.y - (mario.y + mario.height)
+
     if( xAxis < 0 && yAxis < 0){
         const press = document.querySelector('#press')
         // if mario hits hurdle, animation stop
@@ -139,6 +181,16 @@ function collision(mario, hurdle){
         press.innerText = 'Press ESC to restart'
         alert(`You scored ${counting-1}`)
     
+    }
+}
+function hitDetect(mario, shell){
+    const xAxis1 = shell.x - (mario.x + mario.width)
+    const yAxis1 = shell.y - (mario.y + mario.height)
+    if(xAxis1 < 0 && yAxis1 < 0){
+        cancelAnimationFrame(animation)
+        press.innerText = ''
+        press.innerText = 'Press ESC to restart'
+        alert(`You scored ${counting-1}`)
     }
 }
 // not working...
