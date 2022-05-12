@@ -12,7 +12,7 @@ Do you think Mario is fast enough to win the race?
 
 ## Wireframes
 - Pressing upwards arrow key will make mario jump
-- Able to detect Mario hitting the hurdle
+- Able to detect Mario hitting the shell
 
 ![wireframe](./wireframe.png)
 
@@ -24,11 +24,11 @@ Do you think Mario is fast enough to win the race?
 - Render the characters who are joining the race
 - Render the hurdles which is going to be obstacles
 - Make the player able to run
-- Make the player able to jump and pass the hurdle
-- Stop the game if Mario couldn't passed the hurdle
+- Make the player able to jump and pass the koopa shells
+- Stop the game if Mario couldn't passed the shells
 
 ## Stretch Goals
 
--  Make other players able to run and jump as well
-- if possible, going to add more players to compete with
-- Pressing space will be a key for sprint of Mario
+-  Make more obstacles.
+-  Make the game look prettier, in good shape.
+-  Pressing space will be a key for sprint

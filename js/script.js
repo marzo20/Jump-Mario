@@ -2,12 +2,15 @@ const canvas = document.querySelector('#canvas')
 const ctx = canvas.getContext('2d')
 
 
-canvas.width = window.innerWidth - 100
-canvas.height = window.innerHeight - 100
+canvas.width = window.innerWidth-50
+canvas.height = window.innerHeight
 const mario1 = new Image()
 mario1.src = './images/Mario_jumping_.png'
 const bg = new Image()
 bg.src = './images/645984.jpeg'
+const main = new Image()
+
+
 function Background(){
     this.x = 0, this.y = 0, this.width = canvas.width, this.height = canvas.height
     this.render = function (){
@@ -224,11 +227,13 @@ let jumping = false
 let gameOn = false
 document.addEventListener('keyup', (event) => {
     if(event.code === 'Enter'){
+        const status = document.querySelector('#status')
         gameOn = true
-        console.log('enter pressed')
+        press.innerText = 'Press Space to Jump'
+        status.innerText = 'Start!'
         movingHurdle()
     }
-} )
+}, {once: true})
 document.addEventListener('keyup', (event) => {
     if(event.code === 'Escape'){
         document.location.reload(true)
@@ -246,10 +251,10 @@ ctx.font = "30px Comic Sans MS"
 
 ctx.textAlign = "center"
 ctx.fillStyle = 'white'
-ctx.fillText("Press Enter to Start", canvas.width/2, 200)
+ctx.fillText("Press Enter to Start", canvas.width/2, 650)
 function whiteText (){
     if(gameOn == false){
-    ctx.fillText("Press Enter to Start", canvas.width/2, 200)
+    ctx.fillText("Press Enter to Start", canvas.width/2, 650)
     console.log('white')
     }
 }
@@ -259,8 +264,9 @@ function clearText (){
         ctx.clearRect(0,0,canvas.width,canvas.height)
     }
 }
-setInterval(whiteText, 1500)
-setInterval(clearText, 3000)
+
+setInterval(whiteText, 2000)
+setInterval(clearText, 1500)
 
 
 

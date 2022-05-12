@@ -1,8 +1,20 @@
 body{
     text-align: center;
+    width: 1250px;
+    height: 600px;
+    
+    justify-content: center;
+    align-items: center;
+    
+}
+main{
+    height: 600px;
+    display: flex;
 }
 #container{
     background-color: rgb(13, 170, 232);
+    background-image: url("../images/super-mario-bros.jpeg");
+    background-size: cover;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -14,6 +26,10 @@ body{
                          "game game game"
 
 }
+#canvas{
+    height: 740px;
+}
+
 #top-left{
     grid-area: top1;
     display: flex;
@@ -39,6 +55,4 @@ main{
     grid-area: game;
     z-index: 0;
 }
-#start{
-    z-index: 1;
-}
+
