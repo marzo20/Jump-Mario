@@ -1,4 +1,8 @@
+
+
 body{
+    margin: auto;
+    margin-top: 40px;
     text-align: center;
     width: 1250px;
     height: 600px;
@@ -27,7 +31,8 @@ main{
 
 }
 #canvas{
-    height: 740px;
+    width: 1250px;
+    height: 700px;
 }
 
 #top-left{

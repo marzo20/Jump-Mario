@@ -14,7 +14,7 @@ const main = new Image()
 function Background(){
     this.x = 0, this.y = 0, this.width = canvas.width, this.height = canvas.height
     this.render = function (){
-        ctx.drawImage(bg, this.x--,-800)
+        ctx.drawImage(bg, this.x-=1.5,-800)
         if(this.x <= -3000){
             this.x = 0
         }
@@ -182,11 +182,16 @@ function collision(mario, hurdle){
         cancelAnimationFrame(animation)
         press.innerText = ''
         press.innerText = 'Press ESC to restart'
-        ctx.font = "30px Comic Sans MS"
+        ctx.font = "40px Comic Sans MS"
         ctx.fillStyle = "red"
         ctx.textAlign = "center"
         ctx.fillText("Game Over", canvas.width/2, 200)
-    
+        document.addEventListener('keyup', (event) => {
+            if(event.code === 'Escape'){
+                document.location.reload(true)
+                
+            }
+        })
     }
 }
 function hitDetect(mario, shell){
@@ -196,11 +201,16 @@ function hitDetect(mario, shell){
         cancelAnimationFrame(animation)
         press.innerText = ''
         press.innerText = 'Press ESC to restart'
-        ctx.font = "30px Comic Sans MS"
+        ctx.font = "40px Comic Sans MS"
         ctx.fillStyle = "red"
         ctx.textAlign = "center"
         ctx.fillText("Game Over", canvas.width/2, 200)
-        
+        document.addEventListener('keyup', (event) => {
+            if(event.code === 'Escape'){
+                document.location.reload(true)
+                
+            }
+        })
 
     }
 }
@@ -226,36 +236,36 @@ function hitDetect(mario, shell){
 let jumping = false
 let gameOn = false
 document.addEventListener('keyup', (event) => {
-    if(event.code === 'Enter'){
+    if(event.code === 'Enter'  && gameOn == false){
         const status = document.querySelector('#status')
         gameOn = true
         press.innerText = 'Press Space to Jump'
         status.innerText = 'Start!'
         movingHurdle()
     }
-}, {once: true})
-document.addEventListener('keyup', (event) => {
-    if(event.code === 'Escape'){
-        document.location.reload(true)
-        
-    }
 })
+// document.addEventListener('keyup', (event) => {
+//     if(event.code === 'Escape'){
+//         document.location.reload(true)
+        
+//     }
+// })
     
 document.addEventListener('keyup', (event) => {
     if(event.code === 'Space') {
         jumping = true
-        press.innerText = ''
+        // press.innerText = ''
     }
 })
 ctx.font = "30px Comic Sans MS"
 
 ctx.textAlign = "center"
 ctx.fillStyle = 'white'
-ctx.fillText("Press Enter to Start", canvas.width/2, 650)
+ctx.fillText("Press Enter to Start", canvas.width/2, 600)
 function whiteText (){
     if(gameOn == false){
-    ctx.fillText("Press Enter to Start", canvas.width/2, 650)
-    console.log('white')
+    ctx.fillText("Press Enter to Start", canvas.width/2, 600)
+    // console.log('white')
     }
 }
 function clearText (){
