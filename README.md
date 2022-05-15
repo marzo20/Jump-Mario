@@ -34,4 +34,4 @@ Do you think Mario is fast enough to win the race?
 -  Pressing space will be a key for sprint
 
 ## Game Link
-- https://marzo20.github.io/Project-1/
+- https://marzo20.github.io/Jump-Mario/
