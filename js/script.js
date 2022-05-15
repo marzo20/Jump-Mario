@@ -1,7 +1,10 @@
 const canvas = document.querySelector('#canvas')
 const ctx = canvas.getContext('2d')
 
-
+var bgm = new sound("./sound/bgm.mp3") 
+var dieSound = new sound ("./sound/diesound.mp3")
+var jumpSound = new sound ("./sound/jumpsound.mp3")
+var start = new sound ("./sound/start.mp3")
 canvas.width = window.innerWidth-50
 canvas.height = window.innerHeight
 const mario1 = new Image()
@@ -75,8 +78,8 @@ const shell = new Obstacles()
 
 let timer = -2
 // make hurdles array
-const hurdles = []
-const shells = []
+var hurdles = []
+var shells = []
 let jumpTimer = 0
 var animation
 let counting = 1
@@ -84,6 +87,7 @@ let counting = 1
 function movingHurdle(){
     animation = requestAnimationFrame(movingHurdle)
     // more hurdles
+    
     timer++
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     background.render()
@@ -180,6 +184,8 @@ function collision(mario, hurdle){
         // if mario hits hurdle, animation stop
         // ctx.clearRect(0, 0, canvas.width, canvas.height)
         cancelAnimationFrame(animation)
+        bgm.stop()
+        dieSound.play()
         press.innerText = ''
         press.innerText = 'Press ESC to restart'
         ctx.font = "40px Comic Sans MS"
@@ -188,8 +194,11 @@ function collision(mario, hurdle){
         ctx.fillText("Game Over", canvas.width/2, 200)
         document.addEventListener('keyup', (event) => {
             if(event.code === 'Escape'){
-                document.location.reload(true)
-                
+                ctx.clearRect(0,0,canvas.width,canvas.height)
+                gameOn = false
+                resetGlobalVariables()
+                start.play()
+                console.log(shells, hurdles)
             }
         })
     }
@@ -199,15 +208,21 @@ function hitDetect(mario, shell){
     const yAxis1 = shell.y - (mario.y + mario.height)
     if(xAxis1 < 0 && yAxis1 < 0){
         cancelAnimationFrame(animation)
+        bgm.stop()
+        dieSound.play()
         press.innerText = ''
         press.innerText = 'Press ESC to restart'
         ctx.font = "40px Comic Sans MS"
         ctx.fillStyle = "red"
         ctx.textAlign = "center"
         ctx.fillText("Game Over", canvas.width/2, 200)
+        
         document.addEventListener('keyup', (event) => {
             if(event.code === 'Escape'){
-                document.location.reload(true)
+                ctx.clearRect(0,0,canvas.width,canvas.height)
+                gameOn = false
+                resetGlobalVariables()
+                start.play()
                 
             }
         })
@@ -239,8 +254,12 @@ document.addEventListener('keyup', (event) => {
     if(event.code === 'Enter'  && gameOn == false){
         const status = document.querySelector('#status')
         gameOn = true
+        bgm.play()
         press.innerText = 'Press Space to Jump'
         status.innerText = 'Start!'
+        // mario.draw()
+        // ctx.clearRect(0,0,canvas.width, canvas.height)
+        // resetGlobalVariables()
         movingHurdle()
     }
 })
@@ -254,6 +273,7 @@ document.addEventListener('keyup', (event) => {
 document.addEventListener('keyup', (event) => {
     if(event.code === 'Space') {
         jumping = true
+        jumpSound.play()
         // press.innerText = ''
     }
 })
@@ -264,7 +284,9 @@ ctx.fillStyle = 'white'
 ctx.fillText("Press Enter to Start", canvas.width/2, 600)
 function whiteText (){
     if(gameOn == false){
-    ctx.fillText("Press Enter to Start", canvas.width/2, 600)
+        ctx.fillStyle = 'white'
+        start.play()
+     ctx.fillText("Press Enter to Start", canvas.width/2, 600)
     // console.log('white')
     }
 }
@@ -274,11 +296,37 @@ function clearText (){
         ctx.clearRect(0,0,canvas.width,canvas.height)
     }
 }
-
+// made function to reset all the variables to reset
+function resetGlobalVariables (){
+    mario.x = 75
+    mario.y = 550
+    timer = -2
+    hurdles = []
+    shells = []
+    counting = 1
+    jumping = false
+    gameOn = false
+    jumpTimer = 0
+}
 setInterval(whiteText, 2000)
 setInterval(clearText, 1500)
 
 
+
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+        this.sound.play();
+    }
+    this.stop = function(){
+        this.sound.pause();
+    }    
+}
 
 // function gameLoop () {
 //     ctx.clearRect(0, 0, canvas.width, canvas.height)
